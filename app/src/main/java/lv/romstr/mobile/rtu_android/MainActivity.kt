@@ -2,32 +2,36 @@ package lv.romstr.mobile.rtu_android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val items = mutableListOf(
-            ShoppingItem("Bread", 1, "pcs."),
-            ShoppingItem("Eggs", 10, "pcs."),
-            ShoppingItem("Milk", 1, "l"),
-            ShoppingItem("Potatoes", 2, "kg"))
+    private val keepItems = RandomData.items
 
-    private lateinit var adapter: ShoppingItemRecyclerAdapter
+    private lateinit var adapter: KeepItemRecyclerAdapter
+    private lateinit var layoutManager: StaggeredGridLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = ShoppingItemRecyclerAdapter(items)
+        layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).apply {
+                gapStrategy = GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+            }
+        mainItems.layoutManager = layoutManager
+        adapter = KeepItemRecyclerAdapter(keepItems)
         mainItems.adapter = adapter
 
-        mainButtonAdd.setOnClickListener { appendItem() }
+        mainButtonAddText.setOnClickListener { addRandomKeepItem(RandomData.textItem) }
+        mainButtonAddImage.setOnClickListener { addRandomKeepItem(RandomData.imageItem) }
     }
 
-    private fun appendItem() {
-        items.add(ShoppingItem(mainEditName.text.toString(), 1, ""))
-        items.sortBy { it.name }
-        mainEditName.text.clear()
-        adapter.notifyDataSetChanged()
+    private fun addRandomKeepItem(item: KeepItem) {
+        keepItems.add(0, item)
+        adapter.notifyItemInserted(0)
+        mainItems.smoothScrollToPosition(0)
     }
 }

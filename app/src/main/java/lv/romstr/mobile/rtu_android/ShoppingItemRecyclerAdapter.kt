@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_shopping.view.*
 
 class ShoppingItemRecyclerAdapter(private val items: MutableList<ShoppingItem>) :
@@ -27,6 +28,8 @@ class ShoppingItemRecyclerAdapter(private val items: MutableList<ShoppingItem>) 
         holder.itemView.shoppingQuantity.text = context.resources
             .getString(R.string.quantity_text, item.quantity, item.unit)
 
+        loadIcon(holder.itemView, item)
+
         holder.itemView.setOnClickListener {
             Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
         }
@@ -34,6 +37,17 @@ class ShoppingItemRecyclerAdapter(private val items: MutableList<ShoppingItem>) 
         holder.itemView.shoppingRemove.setOnClickListener {
             items.removeAt(position)
             notifyDataSetChanged()
+        }
+    }
+
+    private fun loadIcon(itemView: View, item: ShoppingItem) {
+        itemView.shoppingIcon.visibility =
+            if (item.imageUrl == null) View.INVISIBLE else View.VISIBLE
+        item.imageUrl?.let {
+            Glide.with(itemView)
+                .load(it)
+                .circleCrop()
+                .into(itemView.shoppingIcon)
         }
     }
 }

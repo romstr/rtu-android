@@ -6,34 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/mainEditName"
+    <!--    <EditText-->
+    <!--        android:id="@+id/mainEditName"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="@dimen/margin_default"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/mainButtonAdd"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <Button
+        android:id="@+id/mainButtonAddImage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        app:layout_constraintEnd_toStartOf="@id/mainButtonAdd"
+        android:layout_margin="@dimen/margin_default"
+        android:text="@string/button_add_image"
+        app:layout_constraintEnd_toStartOf="@id/mainButtonAddText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/mainButtonAdd"
-        android:text="@string/button_add"
-        android:layout_width="wrap_content"
+        android:id="@+id/mainButtonAddText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_margin="@dimen/margin_default"
+        android:text="@string/button_add_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/mainEditName"
+        app:layout_constraintStart_toEndOf="@id/mainButtonAddImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainItems"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainEditName"
+        app:layout_constraintTop_toBottomOf="@id/mainButtonAddImage"
+        app:spanCount="2"
         tools:listitem="@layout/item_shopping" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

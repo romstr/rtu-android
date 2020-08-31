@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="button_add">Pievienot</string>
+    <string name="button_add_image">Bilde</string>
+    <string name="button_add_text">Teksts</string>
 </resources>
