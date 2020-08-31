@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).apply {
+            StaggeredGridLayoutManager(
+                resources.getInteger(R.integer.span_count), StaggeredGridLayoutManager.VERTICAL
+            ).apply {
                 gapStrategy = GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
             }
         mainItems.layoutManager = layoutManager
