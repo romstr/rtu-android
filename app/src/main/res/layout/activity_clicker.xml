@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ClickerActivity">
 
-    <Button
-        android:id="@+id/mainButtonClicker"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/clickerText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_default"
-        android:text="@string/button_clicker"
-        app:layout_constraintBottom_toTopOf="@id/mainButtonChat"
+        android:text="0"
+        app:layout_constraintBottom_toTopOf="@+id/clickerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/mainButtonChat"
-        android:layout_width="0dp"
+        android:id="@+id/clickerButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_default"
-        android:text="@string/button_chat"
+        android:text="@string/button_click"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainButtonClicker" />
+        app:layout_constraintTop_toBottomOf="@id/clickerText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

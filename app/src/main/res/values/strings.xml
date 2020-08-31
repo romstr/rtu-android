@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">RTU-Android</string>
+    <string name="button_clicker">Clicker</string>
+    <string name="button_chat">Chat</string>
+    <string name="button_click">Click</string>
+    <string name="clicker_toast">Clicked %d times!</string>
+    <string name="label_reply_received">Reply received</string>
+    <string name="hint_enter_message">Enter message</string>
+    <string name="button_send">Send</string>
+    <string name="label_message_received">Message received</string>
+    <string name="button_reply">Reply</string>
 </resources>
