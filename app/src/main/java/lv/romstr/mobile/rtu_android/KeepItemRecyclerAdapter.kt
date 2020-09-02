@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_keep.view.*
 import kotlinx.android.synthetic.main.item_keep.view.keepClose
 import kotlinx.android.synthetic.main.item_keep_image.view.*
+import kotlinx.android.synthetic.main.item_keep_radio.view.*
 
 class KeepItemRecyclerAdapter(private val items: MutableList<KeepItem>) :
     RecyclerView.Adapter<KeepItemRecyclerAdapter.KeepViewHolder>() {
@@ -33,17 +34,30 @@ class KeepItemRecyclerAdapter(private val items: MutableList<KeepItem>) :
         }
     }
 
+    inner class RadioViewHolder(view: View) : KeepViewHolder(view) {
+        override fun bind(position: Int) {
+            val item = items[position] as KeepItemRadio
+            itemView.option1.text = item.a
+            itemView.option2.text = item.b
+            itemView.option3.text = item.c
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeepViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return if (viewType == IMAGE_KEEP) {
-            ImageViewHolder(inflater.inflate(R.layout.item_keep_image, parent, false))
-        } else {
-            TextViewHolder(inflater.inflate(R.layout.item_keep, parent, false))
+        return when (viewType) {
+            IMAGE_KEEP -> ImageViewHolder(inflater.inflate(R.layout.item_keep_image, parent, false))
+            TEXT_KEEP -> TextViewHolder(inflater.inflate(R.layout.item_keep, parent, false))
+            else -> RadioViewHolder(inflater.inflate(R.layout.item_keep_radio, parent, false))
         }
     }
 
     override fun getItemViewType(position: Int) =
-        if (items[position] is KeepItemText) TEXT_KEEP else IMAGE_KEEP
+        when (items[position]) {
+            is KeepItemText -> TEXT_KEEP
+            is KeepItemImage -> IMAGE_KEEP
+            else -> RADIO_KEEP
+        }
 
     override fun getItemCount() = items.size
 
@@ -61,6 +75,7 @@ class KeepItemRecyclerAdapter(private val items: MutableList<KeepItem>) :
     companion object {
         private const val TEXT_KEEP = 0
         private const val IMAGE_KEEP = 1
+        private const val RADIO_KEEP = 2
     }
 
 }

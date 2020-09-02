@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         mainButtonAddText.setOnClickListener { addRandomKeepItem(RandomData.textItem) }
         mainButtonAddImage.setOnClickListener { addRandomKeepItem(RandomData.imageItem) }
+        mainButtonAddRadio.setOnClickListener { addRandomKeepItem(RandomData.radioItem) }
     }
 
     private fun addRandomKeepItem(item: KeepItem) {

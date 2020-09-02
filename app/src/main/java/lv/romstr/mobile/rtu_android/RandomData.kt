@@ -9,6 +9,8 @@ data class KeepItemText(val title: String, val text: String) : KeepItem()
 
 data class KeepItemImage(val uri: String) : KeepItem()
 
+data class KeepItemRadio(val a: String, val b: String, val c: String) : KeepItem()
+
 object RandomData {
 
     private val random = Random()
@@ -46,7 +48,11 @@ object RandomData {
         get() = random.nextInt(LIST_SIZE)
 
     private val randomItem
-        get() = if (random.nextBoolean()) textItem else imageItem
+        get() = when (random.nextInt(3)) {
+            0 -> textItem
+            1 -> imageItem
+            else -> radioItem
+        }
 
     val items
         get() = MutableList(randomSize) { randomItem }
@@ -54,5 +60,7 @@ object RandomData {
     val textItem get() = KeepItemText(randomTitle, randomLorem)
 
     val imageItem get() = KeepItemImage(randomUri)
+
+    val radioItem get() = KeepItemRadio(randomTitle, randomTitle, randomTitle)
 
 }

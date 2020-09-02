@@ -5,4 +5,5 @@
     <string name="button_add">Add</string>
     <string name="button_add_image">Image</string>
     <string name="button_add_text">Text</string>
+    <string name="button_radio">Radio</string>
 </resources>
