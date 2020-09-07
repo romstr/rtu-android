@@ -5,6 +5,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">italic</item>
     </style>
+
+    <style name="AppTheme.Settings">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+    </style>
+
+    <style name="CustomButtonStyle" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:background">@android:color/holo_green_dark</item>
+    </style>
+
+    <style name="CustomTextStyle" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/holo_blue_dark</item>
+    </style>
+
 
 </resources>
