@@ -7,8 +7,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_shopping.view.*
 
-class ShoppingItemRecyclerAdapter(private val items: MutableList<ShoppingItem>) :
-    RecyclerView.Adapter<ShoppingItemRecyclerAdapter.ShoppingViewHolder>() {
+class ShoppingItemRecyclerAdapter(
+    private val items: MutableList<ShoppingItem>,
+    private val listener: (Int) -> Unit
+) : RecyclerView.Adapter<ShoppingItemRecyclerAdapter.ShoppingViewHolder>() {
 
     class ShoppingViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -31,9 +33,11 @@ class ShoppingItemRecyclerAdapter(private val items: MutableList<ShoppingItem>) 
             Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
         }
 
-        holder.itemView.shoppingRemove.setOnClickListener {
-            items.removeAt(position)
-            notifyDataSetChanged()
-        }
+        holder.itemView.shoppingRemove.setOnClickListener { listener(position) }
+    }
+
+    fun removeItem(position: Int) {
+        items.removeAt(position)
+        notifyDataSetChanged()
     }
 }

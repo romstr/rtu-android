@@ -2,32 +2,21 @@ package lv.romstr.mobile.rtu_android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-    private val items = mutableListOf(
-            ShoppingItem("Bread", 1, "pcs."),
-            ShoppingItem("Eggs", 10, "pcs."),
-            ShoppingItem("Milk", 1, "l"),
-            ShoppingItem("Potatoes", 2, "kg"))
-
-    private lateinit var adapter: ShoppingItemRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = ShoppingItemRecyclerAdapter(items)
-        mainItems.adapter = adapter
+        val adapter = PagerAdapter(this)
 
-        mainButtonAdd.setOnClickListener { appendItem() }
-    }
+        pagerView.adapter = adapter
 
-    private fun appendItem() {
-        items.add(ShoppingItem(mainEditName.text.toString(), 1, ""))
-        items.sortBy { it.name }
-        mainEditName.text.clear()
-        adapter.notifyDataSetChanged()
+        TabLayoutMediator(tabLayout, pagerView) { tab, position ->
+            tab.text = "Product tab ${position + 1}"
+        }.attach()
     }
 }
