@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="shopping_units">
+        <item />
+        <item>@string/unit_kg</item>
+        <item>@string/unit_g</item>
+        <item>@string/unit_l</item>
+        <item>@string/unit_pc</item>
+    </string-array>
+</resources>

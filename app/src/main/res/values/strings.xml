@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">app</string>
+    <string name="app_name" translatable="false">app</string>
 
     <string name="quantity_text" translatable="false">%d %s</string>
+
     <string name="button_add">Add</string>
+    <string name="btn_save">Save</string>
+
+    <string name="unit_kg">kg</string>
+    <string name="unit_g">g</string>
+    <string name="unit_l">l</string>
+    <string name="unit_pc">pcs.</string>
 </resources>

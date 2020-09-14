@@ -3,11 +3,13 @@ package lv.romstr.mobile.rtu_android
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_shopping.view.*
 
-class ShoppingItemRecyclerAdapter(private val items: MutableList<ShoppingItem>) :
+class ShoppingItemRecyclerAdapter(
+    private val listener: AdapterClickListener,
+    private val items: MutableList<ShoppingItem>
+) :
     RecyclerView.Adapter<ShoppingItemRecyclerAdapter.ShoppingViewHolder>() {
 
     class ShoppingViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -28,10 +30,11 @@ class ShoppingItemRecyclerAdapter(private val items: MutableList<ShoppingItem>) 
             .getString(R.string.quantity_text, item.quantity, item.unit)
 
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show()
+            listener.itemClicked(items[position])
         }
 
         holder.itemView.shoppingRemove.setOnClickListener {
+            listener.deleteClicked(items[position])
             items.removeAt(position)
             notifyDataSetChanged()
         }
