@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_shopping.view.*
+import lv.romstr.mobile.rtu_android.screens.main.AdapterClickListener
 
 class ShoppingItemRecyclerAdapter(
     private val listener: AdapterClickListener,
@@ -35,8 +36,6 @@ class ShoppingItemRecyclerAdapter(
 
         holder.itemView.shoppingRemove.setOnClickListener {
             listener.deleteClicked(items[position])
-            items.removeAt(position)
-            notifyDataSetChanged()
         }
     }
 }
