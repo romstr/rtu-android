@@ -6,3 +6,10 @@ data class ShoppingItem(
     val unit: String,
     val imageUrl: String? = null
 )
+
+data class CatImage(
+    val id: String,
+    val url: String,
+    val width: Long,
+    val height: Long
+)

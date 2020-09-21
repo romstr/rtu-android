@@ -2,6 +2,7 @@ package lv.romstr.mobile.rtu_android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
 import kotlinx.android.synthetic.main.activity_main.*
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: KeepItemRecyclerAdapter
     private lateinit var layoutManager: StaggeredGridLayoutManager
+    private val repository = CatRepository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +29,19 @@ class MainActivity : AppCompatActivity() {
         adapter = KeepItemRecyclerAdapter(keepItems)
         mainItems.adapter = adapter
 
-        mainButtonAddText.setOnClickListener { addRandomKeepItem(RandomData.textItem) }
-        mainButtonAddImage.setOnClickListener { addRandomKeepItem(RandomData.imageItem) }
-        mainButtonAddRadio.setOnClickListener { addRandomKeepItem(RandomData.radioItem) }
+        mainButtonAddText.setOnClickListener { addKeepItem(RandomData.textItem) }
+        mainButtonAddImage.setOnClickListener { addImageItem() }
+        mainButtonAddRadio.setOnClickListener { addKeepItem(RandomData.radioItem) }
     }
 
-    private fun addRandomKeepItem(item: KeepItem) {
+    private fun addImageItem() {
+        repository.getImage().observe(this, Observer {
+            val item = KeepItemImage(it.url)
+            addKeepItem(item)
+        })
+    }
+
+    private fun addKeepItem(item: KeepItem) {
         keepItems.add(0, item)
         adapter.notifyItemInserted(0)
         mainItems.smoothScrollToPosition(0)
