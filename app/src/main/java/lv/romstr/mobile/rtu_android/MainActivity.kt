@@ -1,22 +1,38 @@
 package lv.romstr.mobile.rtu_android
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val adapter = PagerAdapter(this)
+        sendEmailButton.setOnClickListener { sendEmail() }
 
-        pagerView.adapter = adapter
+        secondActivityButton.setOnClickListener {
+            Intent(
+                this,
+                SecondActivity::class.java
+            ).also { startActivity(it) }
+        }
+    }
 
-        TabLayoutMediator(tabLayout, pagerView) { tab, position ->
-            tab.text = "Product tab ${position + 1}"
-        }.attach()
+    private fun sendEmail() {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(emailAddressView.text.toString()))
+            putExtra(Intent.EXTRA_SUBJECT, subjectView.text.toString())
+            putExtra(Intent.EXTRA_TEXT, textView.text.toString())
+        }
+
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
     }
 }
