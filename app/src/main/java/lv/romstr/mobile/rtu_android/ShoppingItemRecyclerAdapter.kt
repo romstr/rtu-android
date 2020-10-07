@@ -5,20 +5,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_shopping.view.*
+import lv.romstr.mobile.rtu_android.shopping.ShoppingItem
 
 class ShoppingItemRecyclerAdapter(
     private val listener: AdapterClickListener,
     private val items: MutableList<ShoppingItem>
-) :
-    RecyclerView.Adapter<ShoppingItemRecyclerAdapter.ShoppingViewHolder>() {
+) : RecyclerView.Adapter<ShoppingItemRecyclerAdapter.ShoppingViewHolder>() {
 
-    class ShoppingViewHolder(view: View) : RecyclerView.ViewHolder(view)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_shopping, parent, false)
-        return ShoppingViewHolder(view)
+    fun updateItems(shoppingItems: List<ShoppingItem>?) {
+        shoppingItems?.let {
+            items.addAll(it)
+            notifyDataSetChanged()
+        }
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ShoppingViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_shopping, parent, false)
+        )
 
     override fun getItemCount() = items.size
 
@@ -39,4 +43,7 @@ class ShoppingItemRecyclerAdapter(
             notifyDataSetChanged()
         }
     }
+
+    inner class ShoppingViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
 }

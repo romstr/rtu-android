@@ -2,18 +2,20 @@ package lv.romstr.mobile.rtu_android
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import lv.romstr.mobile.rtu_android.shopping.ShoppingItem
 
 class MainActivity : AppCompatActivity(), AdapterClickListener {
 
-    //    private val db get() = (application as App).db
-    private val db get() = Database.getInstance(this)
+    private lateinit var adapter: ShoppingItemRecyclerAdapter
+
+    private lateinit var viewModel: MainViewModel
 
     private val items = mutableListOf<ShoppingItem>()
-
-    private lateinit var adapter: ShoppingItemRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +23,11 @@ class MainActivity : AppCompatActivity(), AdapterClickListener {
 
         testFiles()
 
-        items.addAll(db.shoppingItemDao().getAll())
         adapter = ShoppingItemRecyclerAdapter(this, items)
         mainItems.adapter = adapter
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.shoppingItems.observe(this, Observer(adapter::updateItems))
 
         mainButtonAdd.setOnClickListener { appendItem() }
     }
@@ -49,13 +53,13 @@ class MainActivity : AppCompatActivity(), AdapterClickListener {
     }
 
     private fun appendItem() {
-        val item = ShoppingItem(mainEditName.text.toString(), 1, "")
-        item.uid = db.shoppingItemDao().insertAll(item).first()
-        items.add(item)
-
-        items.sortBy { it.name }
-        mainEditName.text.clear()
-        adapter.notifyDataSetChanged()
+//        val item = ShoppingItem(mainEditName.text.toString(), 1, "")
+//        item.uid = db.shoppingItemDao().insertAll(item).first()
+//        items.add(item)
+//
+//        items.sortBy { it.name }
+//        mainEditName.text.clear()
+//        adapter.notifyDataSetChanged()
     }
 
     override fun itemClicked(item: ShoppingItem) {
@@ -65,18 +69,18 @@ class MainActivity : AppCompatActivity(), AdapterClickListener {
     }
 
     override fun deleteClicked(item: ShoppingItem) {
-        db.shoppingItemDao().delete(item)
+//        db.shoppingItemDao().delete(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_DETAILS && resultCode == RESULT_OK && data != null) {
-            val id = data.getLongExtra(EXTRA_ID, 0)
-            val item = db.shoppingItemDao().getItemById(id)
-            val position = items.indexOfFirst { it.uid == item.uid }
-            items[position] = item
-            adapter.notifyItemChanged(position)
-        }
+//        if (requestCode == REQUEST_CODE_DETAILS && resultCode == RESULT_OK && data != null) {
+//            val id = data.getLongExtra(EXTRA_ID, 0)
+//            val item = db.shoppingItemDao().getItemById(id)
+//            val position = items.indexOfFirst { it.uid == item.uid }
+//            items[position] = item
+//            adapter.notifyItemChanged(position)
+//        }
     }
 
     companion object {
