@@ -17,7 +17,7 @@ interface ShoppingItemDao {
     fun getAll(): LiveData<List<ShoppingItem>>
 
     @Query("SELECT * FROM shopping_item WHERE uid = :itemId")
-    fun getItemById(itemId: Long): ShoppingItem
+    fun getItemById(itemId: Long): LiveData<ShoppingItem>
 
     @Insert
     fun insertAll(vararg items: ShoppingItem): List<Long>

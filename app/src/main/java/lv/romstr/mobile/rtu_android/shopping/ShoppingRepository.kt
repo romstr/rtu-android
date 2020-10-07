@@ -9,4 +9,6 @@ class ShoppingRepository(private val context: Context) {
 
     fun getAllShoppingItems() = db.shoppingItemDao().getAll()
 
+    fun getShoppingItemById(id: Long) = db.shoppingItemDao().getItemById(id)
+
 }

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import lv.romstr.mobile.rtu_android.detail.DetailActivity
 import lv.romstr.mobile.rtu_android.shopping.ShoppingItem
 
 class MainActivity : AppCompatActivity(), AdapterClickListener {
