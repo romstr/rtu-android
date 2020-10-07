@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_detail.*
 import lv.romstr.mobile.rtu_android.R
 import lv.romstr.mobile.rtu_android.ShoppingItem
-import lv.romstr.mobile.rtu_android.api.Resource
+import lv.romstr.mobile.rtu_android.api.FirebaseRepository
 import lv.romstr.mobile.rtu_android.screens.main.MainActivity.Companion.EXTRA_ID
 
 class DetailActivity : AppCompatActivity() {
@@ -21,52 +21,25 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         val id = intent.getStringExtra(EXTRA_ID).orEmpty()
-        viewModel.getItem(id).observe(this, Observer { resource ->
-            when (resource) {
-                is Resource.Success -> {
-                    detailsNameInput.setText(resource.data.name)
-                    detailsCountInput.setText(resource.data.quantity.toString())
-                    val units = resources.getStringArray(R.array.shopping_units)
-                    detailsUnitInput.setSelection(units.indexOfFirst { it == resource.data.unit })
-                }
-                is Resource.Error -> showError(resource.message.orEmpty())
-                is Resource.Loading -> showProgress()
-                is Resource.Loaded -> hideProgress()
-            }
+
+        viewModel.getItem(id).observe(this, {
+            detailsNameInput.setText(it.name)
+            detailsCountInput.setText(it.quantity.toString())
+            val units = resources.getStringArray(R.array.shopping_units)
+            detailsUnitInput.setSelection(units.indexOfFirst { unit -> unit == it.unit })
         })
 
         detailsSave.setOnClickListener {
             viewModel.updateItem(
-                id,
                 ShoppingItem(
+                    id = id,
                     name = detailsNameInput.text.toString(),
                     quantity = detailsCountInput.text.toString().toInt(),
                     unit = detailsUnitInput.selectedItem.toString()
                 )
-            ).observe(this, Observer {
-                when (it) {
-                    is Resource.Success -> {
-                        setResult(RESULT_OK)
-                        finish()
-                    }
-                    is Resource.Loading -> showProgress()
-                    is Resource.Loaded -> hideProgress()
-                    is Resource.Error -> showError(it.message.orEmpty())
-                }
-            })
+            )
+            setResult(RESULT_OK)
+            finish()
         }
     }
-
-    private fun showProgress() {
-        detailProgress.visibility = View.VISIBLE
-    }
-
-    private fun hideProgress() {
-        detailProgress.visibility = View.GONE
-    }
-
-    private fun showError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
 }

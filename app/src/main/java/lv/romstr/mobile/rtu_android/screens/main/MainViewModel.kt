@@ -2,14 +2,14 @@ package lv.romstr.mobile.rtu_android.screens.main
 
 import androidx.lifecycle.ViewModel
 import lv.romstr.mobile.rtu_android.ShoppingItem
-import lv.romstr.mobile.rtu_android.api.ShoppingRepository
+import lv.romstr.mobile.rtu_android.api.FirebaseRepository
 
-class MainViewModel(private val repository: ShoppingRepository = ShoppingRepository) : ViewModel() {
+class MainViewModel(private val repository: FirebaseRepository = FirebaseRepository) : ViewModel() {
 
-    fun getItems() = repository.getItems()
+    fun getItems() = repository.observeItems()
 
-    fun createItem(item: ShoppingItem) = repository.createItem(item)
+    fun createItem(item: ShoppingItem) = repository.addItem(item)
 
-    fun removeItem(id: String) = repository.removeItem(id)
+    fun removeItem(item: ShoppingItem) = repository.removeItem(item)
 
 }

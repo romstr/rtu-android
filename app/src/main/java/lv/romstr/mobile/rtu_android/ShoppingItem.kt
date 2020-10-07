@@ -1,10 +1,12 @@
 package lv.romstr.mobile.rtu_android
 
-data class ShoppingItem(
-    val name: String,
-    val quantity: Int,
-    val unit: String,
-    var id: String = ""
-)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-data class ItemId(val id: String)
+@Parcelize
+data class ShoppingItem(
+    val name: String = "",
+    val quantity: Int = 0,
+    val unit: String = "",
+    var id: String = ""
+): Parcelable

@@ -2,9 +2,15 @@
 <resources>
     <string name="button_add">Pievienot</string>
     <string name="btn_save">Saglabāt</string>
+    <string name="menu_sign_out">Izrakstīties</string>
+    <string name="label_greeting">Sveiki, %s!</string>
+    <string name="label_signed_out">Izrakstīts</string>
 
     <string name="unit_kg">kg</string>
     <string name="unit_g">g</string>
     <string name="unit_l">l</string>
     <string name="unit_pc">gab.</string>
+
+    <string name="channel_name">Piedāvājumi</string>
+    <string name="channel_description">Karstie piedāvājumi</string>
 </resources>

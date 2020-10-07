@@ -5,9 +5,15 @@
 
     <string name="button_add">Add</string>
     <string name="btn_save">Save</string>
+    <string name="menu_sign_out">Sign out</string>
+    <string name="label_greeting">Hello, %s!</string>
+    <string name="label_signed_out">Signed out</string>
 
     <string name="unit_kg">kg</string>
     <string name="unit_g">g</string>
     <string name="unit_l">l</string>
     <string name="unit_pc">pcs.</string>
+
+    <string name="channel_name">Offers</string>
+    <string name="channel_description">Hot item offers</string>
 </resources>
