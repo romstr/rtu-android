@@ -1,4 +1,4 @@
-package lv.romstr.mobile.rtu_android
+package lv.romstr.mobile.rtu_android.chat
 
 import android.app.Activity
 import android.content.Intent
@@ -6,7 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_chat_reply.*
-import lv.romstr.mobile.rtu_android.ChatSendActivity.Companion.SEND_MESSAGE_EXTRA
+import lv.romstr.mobile.rtu_android.R
+import lv.romstr.mobile.rtu_android.chat.ChatSendActivity.Companion.SEND_MESSAGE_EXTRA
 
 class ChatReplyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,9 +1,10 @@
-package lv.romstr.mobile.rtu_android
+package lv.romstr.mobile.rtu_android.clicker
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_clicker.*
+import lv.romstr.mobile.rtu_android.R
 
 class ClickerActivity : AppCompatActivity() {
 
