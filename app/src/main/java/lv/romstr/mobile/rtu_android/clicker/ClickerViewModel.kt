@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ClickerViewModel : ViewModel() {
+class ClickerViewModel(initialValue: Int) : ViewModel() {
 
     private val _clicks = MutableLiveData<Int>()
     private val _dividedByTen = MutableLiveData<Boolean>()
@@ -16,7 +16,7 @@ class ClickerViewModel : ViewModel() {
         get() = _dividedByTen
 
     init {
-        _clicks.value = 0
+        _clicks.value = initialValue
         _dividedByTen.value = false
     }
 

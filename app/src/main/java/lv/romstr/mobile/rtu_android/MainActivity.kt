@@ -13,7 +13,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mainButtonClicker.setOnClickListener {
-            startActivity(Intent(this, ClickerActivity::class.java))
+            startActivity(
+                Intent(this, ClickerActivity::class.java)
+                    .putExtra(ClickerActivity.CLICKS_EXTRA, 25)
+            )
         }
 
         mainButtonChat.setOnClickListener {

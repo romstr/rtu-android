@@ -12,18 +12,20 @@ class ClickerActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ClickerViewModel
 
+    private lateinit var viewModelFactory: ClickerViewModelFactory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clicker)
 
-        viewModel = ViewModelProvider(this).get(ClickerViewModel::class.java)
+        viewModelFactory = ClickerViewModelFactory(intent.getIntExtra(CLICKS_EXTRA, 0))
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ClickerViewModel::class.java)
         viewModel.clicks.observe(this, Observer { clicksCount ->
             clickerText.text = "$clicksCount"
         })
         viewModel.dividedByTen.observe(this, Observer { isDividedByTen ->
             if (isDividedByTen) showToast()
         })
-//        viewModel.clicks = savedInstanceState?.getInt(CLICKS_EXTRA) ?: 0
 
         clickerButton.setOnClickListener { incrementClickCount() }
     }
@@ -44,6 +46,6 @@ class ClickerActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val CLICKS_EXTRA = "lv.romstr.mobile.clicks"
+        const val CLICKS_EXTRA = "lv.romstr.mobile.clicks"
     }
 }
