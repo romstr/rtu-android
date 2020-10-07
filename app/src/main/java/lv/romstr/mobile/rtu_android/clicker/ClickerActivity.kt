@@ -17,20 +17,13 @@ class ClickerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_clicker)
 
         viewModel = ViewModelProvider(this).get(ClickerViewModel::class.java)
-        viewModel.clicks.observe(this, Observer {
-            clickerText.text = "$it"
+        viewModel.clicks.observe(this, Observer { clicksCount ->
+            clickerText.text = "$clicksCount"
         })
-        viewModel.dividableByTen.observe(this, Observer { isDividableByTen ->
-            if (isDividableByTen) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.clicker_toast, viewModel.clicks.value),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        viewModel.dividedByTen.observe(this, Observer { isDividedByTen ->
+            if (isDividedByTen) showToast()
         })
 //        viewModel.clicks = savedInstanceState?.getInt(CLICKS_EXTRA) ?: 0
-
 
         clickerButton.setOnClickListener { incrementClickCount() }
     }
@@ -38,6 +31,16 @@ class ClickerActivity : AppCompatActivity() {
     private fun incrementClickCount() {
         viewModel.incrementClicks()
         viewModel.divideByTen()
+    }
+
+    private fun showToast() {
+        Toast.makeText(
+            this,
+            getString(R.string.clicker_toast, viewModel.clicks.value),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        viewModel.setToastShown()
     }
 
     companion object {
