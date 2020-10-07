@@ -1,5 +1,6 @@
-package lv.romstr.mobile.rtu_android
+package lv.romstr.mobile.rtu_android.shopping
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Entity(tableName = "shopping_item")
@@ -13,7 +14,7 @@ data class ShoppingItem(
 @Dao
 interface ShoppingItemDao {
     @Query("SELECT * FROM shopping_item")
-    fun getAll(): List<ShoppingItem>
+    fun getAll(): LiveData<List<ShoppingItem>>
 
     @Query("SELECT * FROM shopping_item WHERE uid = :itemId")
     fun getItemById(itemId: Long): ShoppingItem

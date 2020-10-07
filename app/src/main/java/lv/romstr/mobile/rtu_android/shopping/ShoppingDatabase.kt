@@ -1,4 +1,4 @@
-package lv.romstr.mobile.rtu_android
+package lv.romstr.mobile.rtu_android.shopping
 
 import android.content.Context
 import androidx.room.Database
