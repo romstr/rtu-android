@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity(), AdapterClickListener {
         fileList().forEach(::println)
     }
 
+    // Not used in this practice
     private fun appendItem() {
 //        val item = ShoppingItem(mainEditName.text.toString(), 1, "")
 //        item.uid = db.shoppingItemDao().insertAll(item).first()
@@ -69,10 +70,12 @@ class MainActivity : AppCompatActivity(), AdapterClickListener {
         startActivityForResult(intent, REQUEST_CODE_DETAILS)
     }
 
+    // Not used in this practice
     override fun deleteClicked(item: ShoppingItem) {
 //        db.shoppingItemDao().delete(item)
     }
 
+    // Not used in this practice
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 //        if (requestCode == REQUEST_CODE_DETAILS && resultCode == RESULT_OK && data != null) {

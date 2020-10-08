@@ -23,6 +23,7 @@ class DetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
         viewModel.shoppingItem.observe(this, Observer(::showShoppingItem))
 
+        // Not used in this practice
         detailsSave.setOnClickListener {
 //            db.shoppingItemDao().update(
 //                item.copy(
