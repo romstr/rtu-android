@@ -28,6 +28,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.animation.addListener
@@ -132,12 +133,10 @@ class MainActivity : AppCompatActivity() {
         var starWidth = star.width.toFloat()
         var starHeight = star.height.toFloat()
 
-        val newStar = AppCompatImageView(this)
-        newStar.setImageResource(R.drawable.ic_star)
-        newStar.layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT,
-            FrameLayout.LayoutParams.WRAP_CONTENT
-        )
+        val newStar = AppCompatImageView(this).apply {
+            setImageResource(R.drawable.ic_star)
+            layoutParams = FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+        }
         container.addView(newStar)
 
         newStar.scaleX = Math.random().toFloat() * 1.5f + .1f
@@ -150,19 +149,17 @@ class MainActivity : AppCompatActivity() {
 
         val mover = ObjectAnimator.ofFloat(
             newStar, View.TRANSLATION_Y, -starHeight, containerHeight + starHeight
-        )
-        mover.interpolator = AccelerateInterpolator(1f)
+        ).apply { interpolator = AccelerateInterpolator(1f) }
 
         val rotator = ObjectAnimator.ofFloat(
             newStar, View.ROTATION, (Math.random() * 1080).toFloat()
-        )
-        rotator.interpolator = LinearInterpolator()
+        ).apply { interpolator = LinearInterpolator() }
 
-        val set = AnimatorSet()
-        set.playTogether(rotator, mover)
-        set.duration = (Math.random() * 1500 + 500).toLong()
-        set.doOnEnd { container.removeView(newStar) }
-        set.start()
+        AnimatorSet().apply {
+            playTogether(rotator, mover)
+            duration = (Math.random() * 1500 + 500).toLong()
+            doOnEnd { container.removeView(newStar) }
+        }.start()
     }
 
     private fun ObjectAnimator.repeat() {
